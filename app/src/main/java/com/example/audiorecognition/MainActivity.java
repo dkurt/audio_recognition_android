@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void startRecording() {
         logger.info("Start recording");
+        resultView.setText("");
         recorder = new AudioRecord(MediaRecorder.AudioSource.MIC,
                      16000,
                                    AudioFormat.CHANNEL_IN_MONO,
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void stopRecording() {
         logger.info("Stop recording");
+        resultView.setText("Processing...");
 
         float[] data = new float[16000];
         recorder.read(data, 0, 16000, AudioRecord.READ_BLOCKING);
@@ -220,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                resultView.setText("Command:" + labels[maxScoreId]);
+                resultView.setText("Command: " + labels[maxScoreId]);
             }
         });
     }
